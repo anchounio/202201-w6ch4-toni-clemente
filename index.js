@@ -34,6 +34,12 @@ app.get('/books', async (req, resp) => {
     resp.send(allbooks);
 });
 
+app.get('/books', async (req, resp) => {
+    //mongoConnect();
+    const allbooks = await getAllBook();
+    resp.send(allbooks);
+});
+
 //console.log(getAllBook());
 
 // app.get('/tasks', (req, resp) => {
@@ -43,7 +49,8 @@ app.get('/books', async (req, resp) => {
 
 // app.get('/tasks/:id', (req, resp, next) => {
 //     // devolver las tareas
-//     const result = TASKS.find((item) => +item.id === +req.params.id);
+//     //const result = TASKS.find((item) => +item.id === +req.params.id);
+//     const onebook = await get;
 //     if (result) {
 //         resp.json(result);
 //     } else {
