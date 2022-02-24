@@ -37,7 +37,7 @@ export async function updateBook(id, partialBook) {
     return result;
 }
 
-export async function deleteBook() {
+export async function deleteBook(id) {
     const dbId = ObjectId(id);
     const { booksCollection, mongoClient } = await booksConnect();
     const result = await booksCollection.findOneAndDelete({ _id: dbId });

@@ -4,9 +4,11 @@ import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
-import { MongoClient } from 'mongodb';
-import { mongoConnect } from './services/db.js';
+
 import { getAllBook } from './services/books.crud.js';
+import { getBook } from './services/books.crud.js';
+import { deleteBook } from './services/books.crud.js';
+import { insertBook } from './services/books.crud.js';
 
 // let TASKS = [
 //     { id: 1, name: 'Task 1' },
@@ -34,29 +36,29 @@ app.get('/books', async (req, resp) => {
     resp.send(allbooks);
 });
 
-app.get('/books', async (req, resp) => {
-    //mongoConnect();
-    const allbooks = await getAllBook();
-    resp.send(allbooks);
+app.get('/books/:id', async (req, resp) => {
+    // devolver las tareas
+    //const result = TASKS.find((item) => +item.id === +req.params.id);
+    const { id } = { ...req.params };
+    const result = await getBook(id);
+    console.log(id);
+    resp.send(result);
 });
 
-//console.log(getAllBook());
+app.delete('/books/:id', async (req, resp) => {
+    const { id } = { ...req.params };
+    const result = await deleteBook(id);
+    console.log(id);
+    resp.send(result);
+});
 
-// app.get('/tasks', (req, resp) => {
-//     // devolver las tareas
-//     resp.json(TASKS);
-// });
-
-// app.get('/tasks/:id', (req, resp, next) => {
-//     // devolver las tareas
-//     //const result = TASKS.find((item) => +item.id === +req.params.id);
-//     const onebook = await get;
-//     if (result) {
-//         resp.json(result);
-//     } else {
-//         next(new Error('Tarea no existente'));
-//     }
-// });
+app.post('/books', async (req, resp) => {
+    req.body;
+    console.log(req.body);
+    const result = await insertBook(book);
+    console.log(id);
+    resp.send(result);
+});
 
 // app.post('/tasks', (req, resp) => {
 //     req.body;
